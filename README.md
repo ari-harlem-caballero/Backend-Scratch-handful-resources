@@ -19,9 +19,9 @@
 
 It’s time to get some practice writing controllers, models, and tests! For this deliverable, you’ll make a single API that can create/read/update/delete five different types of resources. They don’t have to be related in any way; for example, your API could use dogs, shows, songs, games, and foods.
 
-You need to create five different controllers, five different models, and five different test files corresponding to each resource. Create your tables using the sql/setup.sql file and npm run setup-db command. Your tables should contain at least three fields (including id). Try experimenting with different field types in Postgres.
+You need to create five different controllers, five different models, and five different test files corresponding to each resource. Create your tables using the `sql/setup.sql` file and `npm run setup-d`b command. *Your tables should contain at least three fields (including `id`)*. Try experimenting with different field types in Postgres.
 
-Your test files should be added to the __tests__ directory. Each test file should be named after the resource it’s testing (e.g. __tests__/dogs.test.js). Each route for each resource needs to be tested!
+Your test files should be added to the `__tests__` directory. Each test file should be named after the resource it’s testing (e.g. `__tests__/dogs.test.js`). *Each route for each resource needs to be tested!*
 
 Your commits need to show a vertical approach. A vertical approach means that you wrote the test, controller, and model for a single resource and committed it, rather than writing the tests for all the resources in a single commit, then all the controllers in another, etc. Make sure your commit messages are relevant and descriptive.
 
