@@ -9,3 +9,10 @@ CREATE TABLE songs (
   artist TEXT NOT NULL,
   album TEXT
 );
+
+INSERT INTO
+  song (title, artist, album)
+VALUES
+  ('Honey Whiskey', 'SATICA', 'Honey Whiskey'),
+  ('Industry Baby', 'Lil Nas X', 'Montero'),
+  ('Bad Stuff Happens in the Bathroom', `Bob's Burgers`, `The Bob's Burgers Music Album`);
