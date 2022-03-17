@@ -11,4 +11,12 @@ describe('alchemy-app routes', () => {
   afterAll(() => {
     pool.end();
   });
+
+  // create, getAll, getSingle(id), patch(update), delete
+  it('creates a new song', async () => {
+    const expected =
+    const res =
+
+    expect(res.body).toEqual({ id: expect.any(String), ...expected });
+  });
 });

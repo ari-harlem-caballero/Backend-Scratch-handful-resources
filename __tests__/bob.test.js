@@ -11,4 +11,6 @@ describe('alchemy-app routes', () => {
   afterAll(() => {
     pool.end();
   });
+
+  // create, getAll, getSingle(id), patch(update), delete
 });
