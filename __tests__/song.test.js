@@ -63,4 +63,13 @@ describe('alchemy-app routes', () => {
     expect(res.body).toEqual(expected);
     expect(await Song.updateSongById(song.id)).toEqual(expected);
   });
+
+  it('should delete a song based on the ID', async () => {
+    const expected = await Song.getSongById(1);
+
+    const res = await request(app)
+      .delete(`/api/v1/songs/${expected.id}`);
+
+    expect(res.body).toEqual(expected);
+  });
 });
