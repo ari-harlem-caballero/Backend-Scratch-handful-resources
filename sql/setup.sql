@@ -16,7 +16,7 @@ CREATE TABLE bobs (
   quote TEXT NOT NULL,
   character TEXT NOT NULL,
   season INT NOT NULL,
-  episode INT NOT NULL,
+  episode INT NOT NULL
 );
 
 INSERT INTO
