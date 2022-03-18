@@ -66,4 +66,15 @@ describe('alchemy-app routes', () => {
     expect(res.body).toEqual(expected);
     expect(await Bob.getBobQuoteById(quote.id)).toEqual(expected);
   });
+
+  it('should delete a row in bobs table based on id', async () => {
+    const expected = await Bob.insert({ quote: 'Kids are horrible. Why do we keep making them?', character: 'Bob Belcher', season: 1, episode: 17 });
+
+    const res = await request(app)
+      .delete(`/api/v1/bobs/${expected.id}`);
+
+    const quoteList = await Bob.getAllBobQuotes();
+
+    expect(quoteList).not.toContain(res.body);
+  });
 });
