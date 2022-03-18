@@ -47,4 +47,23 @@ describe('alchemy-app routes', () => {
     
     expect(res.body).toEqual(expected);
   });
+
+  it('should update a bob quote based on id', async () => {
+    const quote = await Bob.insert({ quote: 'Kids are horrible. Why do we keep making them?', character: 'Bob Belcher', season: 1, episode: 17 });
+
+    const res = await request(app)
+      .patch(`/api/v1/bobs/${quote.id}`)
+      .send({ season: 4 });
+
+    const expected = {
+      id: expect.any(String),
+      quote: 'Kids are horrible. Why do we keep making them?',
+      character: 'Bob Belcher',
+      season: 4,
+      episode: 17,
+    };
+
+    expect(res.body).toEqual(expected);
+    expect(await Bob.getBobQuoteById(quote.id)).toEqual(expected);
+  });
 });
