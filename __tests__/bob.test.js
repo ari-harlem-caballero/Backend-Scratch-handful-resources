@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const Bob = require('../lib/models/Bob');
 
 describe('alchemy-app routes', () => {
   beforeEach(() => {
@@ -27,5 +28,14 @@ describe('alchemy-app routes', () => {
       .send(expected);
 
     expect(res.body).toEqual({ id: expect.any(String), ...expected });
+  });
+
+  it('should grab all bobs quotes', async () => {
+    const expected = await Bob.getAllBobQuotes();
+
+    const res = await request(app)
+      .get('/api/v1/bobs');
+
+    expect(res.body).toEqual(expected);
   });
 });
