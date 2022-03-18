@@ -11,8 +11,8 @@ CREATE TABLE songs (
 );
 
 INSERT INTO
-  song (title, artist, album)
+  songs(title, artist, album)
 VALUES
   ('Honey Whiskey', 'SATICA', 'Honey Whiskey'),
   ('Industry Baby', 'Lil Nas X', 'Montero'),
-  ('Bad Stuff Happens in the Bathroom', `Bob's Burgers`, `The Bob's Burgers Music Album`);
+  ('Bad Stuff Happens in the Bathroom', 'Bob''s Burgers', 'The Bob''s Burgers Music Album');
