@@ -14,8 +14,15 @@ describe('alchemy-app routes', () => {
 
   // create, getAll, getSingle(id), patch(update), delete
   it('creates a new song', async () => {
-    const expected =
-    const res =
+    const expected = {
+      title: 'Honey Whiskey',
+      artist: 'SATICA',
+      album: 'Honey Whiskey',
+    };
+
+    const res = await request(app)
+      .post('/api/v1/songs')
+      .send(expected);
 
     expect(res.body).toEqual({ id: expect.any(String), ...expected });
   });
