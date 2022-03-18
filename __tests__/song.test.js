@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const Book = require('../lib/models/Song');
 
 describe('alchemy-app routes', () => {
   beforeEach(() => {
@@ -25,5 +26,14 @@ describe('alchemy-app routes', () => {
       .send(expected);
 
     expect(res.body).toEqual({ id: expect.any(String), ...expected });
+  });
+
+  it('should get all songs in the db', async () => {
+    const expected = await Book.getAllSongs();
+
+    const res = await request(app)
+      .get('/api/v1/songs');
+
+    expect(res.body).toEqual(expected);
   });
 });
