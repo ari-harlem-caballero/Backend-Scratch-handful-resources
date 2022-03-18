@@ -3,6 +3,7 @@
 
 DROP TABLE IF EXISTS songs;
 DROP TABLE IF EXISTS bobs;
+DROP TABLE IF EXISTS charcuterie;
 
 CREATE TABLE songs (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -19,6 +20,13 @@ CREATE TABLE bobs (
   episode INT NOT NULL
 );
 
+CREATE TABLE charcuterie (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  ingredient TEXT NOT NULL,
+  category TEXT NOT NULL,
+  cold BOOLEAN NOT NULL,
+);
+
 INSERT INTO
   songs(title, artist, album)
 VALUES
@@ -33,3 +41,10 @@ VALUES
   ('You''ll take the butts you''re given, and you''ll like it!', 'Gene Blecher', 4, 13),
   ('You''re a hurtful slut, Bob!', 'Linda Belcher', 2, 6),
   ('I am powerful forces.', 'Tina Belcher', 7, 3);
+
+INSERT INTO
+  charcuterie(ingredient, category, cold)
+VALUES
+  ('date', 'fruit', 'true'),
+  ('chocolate', 'sweet', 'false'),
+  ('goat cheese', 'cheese', 'true');
