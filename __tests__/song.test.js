@@ -45,4 +45,22 @@ describe('alchemy-app routes', () => {
 
     expect(res.body).toEqual({ ...expected });
   });
+
+  it('updates single song based on ID', async () => {
+    const song = await Song.insert({ title: 'Lapis Lazuli', artist: 'Steven Universe', album: 'Steven Universe Vol.1' });
+
+    const res = await request(app)
+      .patch(`/api/v1/songs/${song.id}`)
+      .send({ title: 'Giant Woman' });
+
+    const expected = {
+      id: expect.any(String),
+      title: 'Giant Woman',
+      artist: 'Steven Universe',
+      album: 'Steven Universe Vol.1',
+    };
+    
+    expect(res.body).toEqual(expected);
+    expect(await Song.updateSongById(song.id)).toEqual(expected);
+  });
 });
