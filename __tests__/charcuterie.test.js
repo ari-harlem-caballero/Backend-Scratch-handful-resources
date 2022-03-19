@@ -38,7 +38,16 @@ describe('alchemy-app routes', () => {
 
     expect(res.body).toEqual(expected);
   });
-  // getSingle(id) (id:1, res:get/exID)
+
+  // getSingle(id) (id:1, res:get/exID, ret:sprEx)
+  it('should get a single char row based on ID', async () => {
+    const expected = await Charcuterie.getCharcById(1);
+
+    const res = await request(app)
+      .get(`/api/v1/charcuteries/${expected.id}`);
+
+    expect(res.body).toEqual({ ...expected });
+  });
   // patch(update) (const:insert, res:patch(link/id)/send(new), ex:id/string)
     // **patch return (await getId(const.id) toEq)**
   // delete (const:insert, res:delete(link/id), const:ALL)
