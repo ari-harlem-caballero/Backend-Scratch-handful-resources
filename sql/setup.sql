@@ -3,6 +3,7 @@
 
 DROP TABLE IF EXISTS songs;
 DROP TABLE IF EXISTS bobs;
+DROP TABLE IF EXISTS charcuteries;
 
 CREATE TABLE songs (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -17,6 +18,13 @@ CREATE TABLE bobs (
   character TEXT NOT NULL,
   season INT NOT NULL,
   episode INT NOT NULL
+);
+
+CREATE TABLE charcuteries (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  ingredient TEXT NOT NULL,
+  category TEXT NOT NULL,
+  cold BOOLEAN NOT NULL
 );
 
 INSERT INTO
@@ -34,3 +42,9 @@ VALUES
   ('You''re a hurtful slut, Bob!', 'Linda Belcher', 2, 6),
   ('I am powerful forces.', 'Tina Belcher', 7, 3);
 
+INSERT INTO
+  charcuteries(ingredient, category, cold)
+VALUES
+  ('date', 'fruit', 'true'),
+  ('chocolate', 'sweet', 'false'),
+  ('goat cheese', 'cheese', 'true');
