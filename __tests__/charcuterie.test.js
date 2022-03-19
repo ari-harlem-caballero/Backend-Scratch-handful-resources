@@ -48,8 +48,27 @@ describe('alchemy-app routes', () => {
 
     expect(res.body).toEqual({ ...expected });
   });
+
   // patch(update) (const:insert, res:patch(link/id)/send(new), ex:id/string)
+  it('should update single char based on ID', async () => {
+    const newCharc = await Charcuterie.insert({ ingredient: 'toast point', category: 'carb', cold: false });
+
+    const res = await request(app)
+      .patch(`/api/v1/charcuteries/${newCharc.id}`)
+      .send({ cold: true });
+
+    const expected = 
+    {
+      id: expect.any(String),
+      ingredient: 'toast point',
+      category: 'carb',
+      cold: true
+    };
+
     // **patch return (await getId(const.id) toEq)**
+    expect(res.body).toEqual(expected);
+    expect(await Charcuterie.getCharcById(newCharc.id)).toEqual(expected);
+  });
   // delete (const:insert, res:delete(link/id), const:ALL)
     // **del ret (ex:All.not.toContain(res.body))
 });
