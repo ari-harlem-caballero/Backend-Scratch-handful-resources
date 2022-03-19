@@ -69,6 +69,17 @@ describe('alchemy-app routes', () => {
     expect(res.body).toEqual(expected);
     expect(await Charcuterie.getCharcById(newCharc.id)).toEqual(expected);
   });
+
   // delete (const:insert, res:delete(link/id), const:ALL)
+  it('should delete single char row based on id', async () => {
+    const newCharc = await Charcuterie.insert({ ingredient: 'toast point', category: 'carb', cold: false });
+
+    const res = await request(app)
+      .delete(`/api/v1/charcuteries${newCharc.id}`);
+
+    const charcList = await Charcuterie.getAllCharcs();
+
     // **del ret (ex:All.not.toContain(res.body))
+    expect(charcList).not.toContain(res.body);
+  });
 });
