@@ -31,11 +31,11 @@ CREATE TABLE charcuteries (
 CREATE TABLE plants (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   name TEXT NOT NULL,
-  scientific_name TEXT,
+  scientific_name TEXT NOT NULL,
   water TEXT NOT NULL,
   sun TEXT NOT NULL,
-  humidity TEXT
-  soil_type TEXT NOT NULL,
+  humidity TEXT NOT NULL,
+  soil_type TEXT NOT NULL
 );
 
 INSERT INTO
@@ -64,5 +64,5 @@ INSERT INTO
   plants(name, scientific_name, water, sun, humidity, soil_type)
 VALUES
   ('Monstera', 'Monstera deliciosa', 'weekly', 'medium indirect', 'room-level', 'potting'),
-  ('Alice Sundew', 'Drosera aliciae', 'daily', 'medium-high', 'medium', 'peat, sand'),
-  ('Moth Orchid', 'Phalaenopsis', 'weekly', 'bright indirect', 'med-high','moss');
+  ('Alice Sundew', 'Drosera aliciae', 'daily', 'medium-high', 'medium', 'peat moss, sand'),
+  ('Moth Orchid', 'Phalaenopsis', 'weekly', 'bright indirect', 'med-high','peat moss');
