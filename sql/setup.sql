@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS songs;
 DROP TABLE IF EXISTS bobs;
 DROP TABLE IF EXISTS charcuteries;
 DROP TABLE IF EXISTS plants;
+DROP TABLE IF EXISTS tvshows;
 
 CREATE TABLE songs (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -38,6 +39,16 @@ CREATE TABLE plants (
   soil_type TEXT NOT NULL
 );
 
+CREATE TABLE tvshows (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  title TEXT NOT NULL,
+  genre TEXT [] NOT NULL,
+  seasons INT NOT NULL,
+  episodes INT,
+  run_time INT,
+  active BOOLEAN
+);
+
 INSERT INTO
   songs(title, artist, album)
 VALUES
@@ -66,3 +77,10 @@ VALUES
   ('Monstera', 'Monstera deliciosa', 'weekly', 'medium indirect', 'room-level', 'potting'),
   ('Alice Sundew', 'Drosera aliciae', 'daily', 'medium-high', 'medium', 'peat moss, sand'),
   ('Moth Orchid', 'Phalaenopsis', 'weekly', 'bright indirect', 'med-high','peat moss');
+
+INSERT INTO
+  tvshows(title, genre, seasons, episodes, run_time, active)
+VALUES
+  ('Bob''s Burgers', '{Animated, Comedy}', 12, 233, 22, 'true'),
+  ('Steven Universe', '{Action, Adventure, Animated, Comedy, Coming-of-age}', 6, 175, 11, 'false'),
+  ('The Office', '{Comedy, Mockumentary, Romance}', 9, 188, 22, 'false');
