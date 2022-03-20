@@ -53,7 +53,35 @@ describe('alchemy-app routes', () => {
   });
 
   // patch(update) (const:insert, res:patch(link/id)/send(new), ex:id/string)
+  it('should update single row in tvshow table based on ID', async () => {
+    const newTvshow = await TVShow.insert({
+      title: 'Haikyuu!!',
+      genre: ['Animation', 'Comedy', 'Drama', 'Sports'],
+      seasons: 4,
+      episodes: 88,
+      runTime: 24,
+      active: true
+    });
+
+    const res = await request(app)
+      .patch(`/api/v1/tvshows/${newTvshow.id}`)
+      .send({ active: false });
+
+    const expected = 
+    {
+      id: expect.any(String),
+      title: 'Haikyuu!!',
+      genre: ['Animation', 'Comedy', 'Drama', 'Sports'],
+      seasons: 4,
+      episodes: 88,
+      runTime: 24,
+      active: false
+    };
     // **patch return (await getId(const.id) toEq)
+    expect(res.body).toEqual(expected);
+    expect(await TVShow.getTVShowById(newTvshow.id)).toEqual(expected);
+  });
+
   // delete (const:insert, res:delete(link/id), const:ALL)
     // **del ret (ex:All.not.toContain(res.body))
 });
