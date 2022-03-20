@@ -53,8 +53,35 @@ describe('alchemy-app routes', () => {
   });
 
   // patch(update) (const:insert, res:patch(link/id)/send(new), ex:id/string)
+  it('should update single row in plant table', async () => {
+    const newPlant = await Plant.insert({ 
+      name: 'Moon Valley Pilea',
+      scientificName: 'Pilea mollis',
+      water: '1-2 per week',
+      sun: 'bright',
+      humidity: 'room-level',
+      soilType: 'peat moss' });
+
+    const res = await request(app)
+      .patch(`/api/v1/plants/${newPlant.id}`)
+      .send({ sun: 'bright indirect' });
+
+    const expected = {
+      id: expect.any(String),
+      name: 'Moon Valley Pilea',
+      scientificName: 'Pilea mollis',
+      water: '1-2 per week',
+      sun: 'bright indirect',
+      humidity: 'room-level',
+      soilType: 'peat moss'
+    };
+
     // **patch return (await getId(const.id) toEq)
+    expect(res.body).toEqual(expected);
+    expect(await Plant.getPlantById(newPlant.id)).toEqual(expected);
+  });
+
   // delete (const:insert, res:delete(link/id), const:ALL)
-    // **del ret (ex:All.not.toContain(res.body))
+  // **del ret (ex:All.not.toContain(res.body))
 
 });
