@@ -3,6 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const Plant = require('../lib/models/Plant');
+const { getAllPlants } = require('../lib/models/Plant');
 
 describe('alchemy-app routes', () => {
   beforeEach(() => {
@@ -82,6 +83,23 @@ describe('alchemy-app routes', () => {
   });
 
   // delete (const:insert, res:delete(link/id), const:ALL)
-  // **del ret (ex:All.not.toContain(res.body))
+  it('should delete a single row in plants table', async () => {
+    const newPlant = await Plant.insert({
+      name: 'Moon Valley Pilea',
+      scientificName: 'Pilea mollis',
+      water: '1-2 per week',
+      sun: 'bright indirect',
+      humidity: 'room-level',
+      soilType: 'peat moss'
+    });
+
+    const res = await request(app)
+      .delete(`/api/v1/plants/${newPlant.id}`);
+
+    const plantList = await getAllPlants();
+
+    // **del ret (ex:All.not.toContain(res.body))
+    expect(plantList).not.toContain(res.body);
+  });
 
 });
