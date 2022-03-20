@@ -2,6 +2,7 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
+const TVShow = require('../lib/models/TVShow');
 
 describe('alchemy-app routes', () => {
   beforeEach(() => {
@@ -30,7 +31,16 @@ describe('alchemy-app routes', () => {
 
     expect(res.body).toEqual({ id: expect.any(String), ...expected });
   });
+
   // getAll (res:get)
+  it('should get all rows in tvshow table', async () => {
+    const expected = await TVShow.getAllTVShows();
+    
+    const res = await request(app)
+      .get('/api/v1/tvshows');
+
+    expect(res.body).toEqual(expected);
+  });
   // getSingle(id) (id:1, res:get/exID, ret:sprEx)
   // patch(update) (const:insert, res:patch(link/id)/send(new), ex:id/string)
     // **patch return (await getId(const.id) toEq)
