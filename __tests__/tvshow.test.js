@@ -3,6 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 const TVShow = require('../lib/models/TVShow');
+const tvshows = require('../lib/controllers/tvshows');
 
 describe('alchemy-app routes', () => {
   beforeEach(() => {
@@ -83,5 +84,22 @@ describe('alchemy-app routes', () => {
   });
 
   // delete (const:insert, res:delete(link/id), const:ALL)
+  it('should delete single row on tvshow table based on id', async () => {
+    const newShow = await TVShow.insert({
+      title: 'Haikyuu!!',
+      genre: ['Animation', 'Comedy', 'Drama', 'Sports'],
+      seasons: 4,
+      episodes: 88,
+      runTime: 24,
+      active: false
+    });
+
+    const res = await request(app)
+      .delete(`/api/v1/tvshows/${newShow.id}`);
+
+    const showList = await TVShow.getAllTVShows();
+
     // **del ret (ex:All.not.toContain(res.body))
+    expect(showList).not.toContain(res.body);
+  });
 });
