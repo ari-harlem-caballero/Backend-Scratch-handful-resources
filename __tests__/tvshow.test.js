@@ -35,13 +35,23 @@ describe('alchemy-app routes', () => {
   // getAll (res:get)
   it('should get all rows in tvshow table', async () => {
     const expected = await TVShow.getAllTVShows();
-    
+
     const res = await request(app)
       .get('/api/v1/tvshows');
 
     expect(res.body).toEqual(expected);
   });
+
   // getSingle(id) (id:1, res:get/exID, ret:sprEx)
+  it('should get a row from tvshows table based on ID', async () => {
+    const expected = await TVShow.getTVShowById(1);
+
+    const res = await request(app)
+      .get(`/api/v1/tvshows/${expected.id}`);
+
+    expect(res.body).toEqual({ ...expected });
+  });
+
   // patch(update) (const:insert, res:patch(link/id)/send(new), ex:id/string)
     // **patch return (await getId(const.id) toEq)
   // delete (const:insert, res:delete(link/id), const:ALL)
