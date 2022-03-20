@@ -43,6 +43,15 @@ describe('alchemy-app routes', () => {
   });
 
   // getSingle(id) (id:1, res:get/exID, ret:sprEx)
+  it('should get a single row in plants table', async () => {
+    const expected = await Plant.getPlantById(1);
+
+    const res = await request(app)
+      .get(`/api/v1/plants/${expected.id}`);
+
+    expect(res.body).toEqual({ ...expected });
+  });
+
   // patch(update) (const:insert, res:patch(link/id)/send(new), ex:id/string)
     // **patch return (await getId(const.id) toEq)
   // delete (const:insert, res:delete(link/id), const:ALL)
