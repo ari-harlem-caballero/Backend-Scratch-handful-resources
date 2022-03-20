@@ -4,6 +4,7 @@
 DROP TABLE IF EXISTS songs;
 DROP TABLE IF EXISTS bobs;
 DROP TABLE IF EXISTS charcuteries;
+DROP TABLE IF EXISTS plants;
 
 CREATE TABLE songs (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -27,6 +28,16 @@ CREATE TABLE charcuteries (
   cold BOOLEAN NOT NULL
 );
 
+CREATE TABLE plants (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  name TEXT NOT NULL,
+  scientific_name TEXT NOT NULL,
+  water TEXT NOT NULL,
+  sun TEXT NOT NULL,
+  humidity TEXT NOT NULL,
+  soil_type TEXT NOT NULL
+);
+
 INSERT INTO
   songs(title, artist, album)
 VALUES
@@ -48,3 +59,10 @@ VALUES
   ('date', 'fruit', 'true'),
   ('chocolate', 'sweet', 'false'),
   ('goat cheese', 'cheese', 'true');
+
+INSERT INTO
+  plants(name, scientific_name, water, sun, humidity, soil_type)
+VALUES
+  ('Monstera', 'Monstera deliciosa', 'weekly', 'medium indirect', 'room-level', 'potting'),
+  ('Alice Sundew', 'Drosera aliciae', 'daily', 'medium-high', 'medium', 'peat moss, sand'),
+  ('Moth Orchid', 'Phalaenopsis', 'weekly', 'bright indirect', 'med-high','peat moss');
